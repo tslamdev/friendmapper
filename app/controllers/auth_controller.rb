@@ -15,8 +15,23 @@ class AuthController < ApplicationController
     access_token = result.split("&").first.split("=").last
 
     current_user.facebook_access_token = access_token
+
+    me_url = "https://graph.facebook.com/me?access_token=#{access_token}"
+
+    me_result = JSON.parse(open(me_url).read)
+
+    current_user.facebook_id = me_result["id"]
+    current_user.name = me_result["name"]
+
     current_user.save
 
     redirect_to current_user
   end
 end
+
+
+
+
+
+
+
