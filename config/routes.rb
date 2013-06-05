@@ -1,6 +1,8 @@
 Sandbox::Application.routes.draw do
   root to: 'Users#index'
 
+  resource :session, only: [:new, :create, :destroy]
+
   resources :users
 
 
