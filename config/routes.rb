@@ -1,4 +1,6 @@
 Sandbox::Application.routes.draw do
+  get '/auth/facebook' => 'Auth#facebook'
+
   root to: 'Users#index'
 
   resource :session, only: [:new, :create, :destroy]
