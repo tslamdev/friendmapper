@@ -1,3 +1,8 @@
+# def dispatch
+#   x = UsersController.new
+#   x.create
+# end
+
 class UsersController < ApplicationController
   before_filter :require_authorized_user, only: [:show, :edit, :update, :destroy]
 
@@ -52,6 +57,9 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        email = UserMailer.welcome(@user)
+        email.deliver
+
         session[:user_id] = @user.id
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created, location: @user }
