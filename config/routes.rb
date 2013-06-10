@@ -7,6 +7,8 @@ Sandbox::Application.routes.draw do
 
   resources :users
 
+  get '/poll_facebook' => 'Users#poll_facebook', as: 'poll_facebook'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
