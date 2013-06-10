@@ -26,6 +26,7 @@ class UsersController < ApplicationController
         f.location = friend_hash["location"]["name"]
         f.user = current_user
         f.save
+        logger.debug "Created friend #{f.name}"
       end
     end
 
