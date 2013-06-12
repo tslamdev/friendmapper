@@ -12,12 +12,14 @@ class UsersController < ApplicationController
   end
 
   def poll_facebook
+    # TODO put this logic into a model somewhere
     url = "https://graph.facebook.com/me/friends?fields=name,id,location&access_token=#{current_user.facebook_access_token}"
 
     result = JSON.parse(open(url).read)
 
     friends = result["data"]
 
+    # OPTIMIZE this should be a map/create
     friends.each do |friend_hash|
       if friend_hash["location"].present?
         f = Friend.new
